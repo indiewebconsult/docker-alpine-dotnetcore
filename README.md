@@ -8,7 +8,7 @@ The ASP.NET Core image builds with the full SDK and .NET Core runtime. It's not 
 The final stage of the build creates a Docker image named `indiewebcsonult/aspdotnetcore:{version}`.  This image allows you to build your solution down to a minimal x64 Alpine .Net Core Console or Web application without ever opening an install executable for the .Net Core platform (Runtime, SDK, ASP.NET, etc). Everything you need to build an app is included.
 
 # Some helpful hints about this project's organization
-* Compiled .Net Core versions are named in Docker Compose files for easy build maintenance
+* Compiled .Net Core versions are named in Docker Compose files for easy build maintenance, based on what .NET Core version your solution needs to target.
 * build.sh builds all images without using Docker cache. This implements our most recent successful build of .Net Core in this project.
 * By default, NodeJS 11.0, Python (v2) and Pip (v2) are packaged inside the base stage of the build.
 * Dockerfiles for each build sequence are nested in the ./base directory
