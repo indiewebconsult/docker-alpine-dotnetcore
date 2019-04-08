@@ -1,5 +1,5 @@
 ### ASP.NET Environment with .NET Core and Nginx for Reverse Proxy/HTTP2 support
-FROM jonmcquade/dotnetcore-runtime-sdk-node-python:dotnetcore-asp
+FROM indiewebconsult/aspdotnetcore:2.2.3-alpine
 ENV NGINX_VERSION 1.15
 
 ##
@@ -145,7 +145,6 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& ln -sf /dev/stdout /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
-VOLUME /var/log
 VOLUME /etc/nginx/conf.d
 
 EXPOSE 80

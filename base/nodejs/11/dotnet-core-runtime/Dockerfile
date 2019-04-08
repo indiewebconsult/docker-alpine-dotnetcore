@@ -1,34 +1,37 @@
-### ASP.NET Core Runtime 2.1.3
-FROM jonmcquade/dotnetcore-runtime-sdk-node-python:base
+### ASP.NET Core Runtime 2.2.3 (includes full runtime and dependencies)
+FROM indiewebconsult/nodejs:11.0-alpine
 WORKDIR /
-ARG dotNetVer="2.2.3"
-ENV DOTNET_VERSION $dotNetVer
-ENV ASPNETCORE_VERSION $dotNetVer
-RUN apk add --no-cache \	
-        ca-certificates \	
-        \	
-        # .NET Core dependencies	
-        krb5-libs \	
-        libcurl \	
-        libgcc \	
-        libintl \	
-        libssl1.0 \	
-        libstdc++ \	
-        libunwind \	
-        libuuid \	
-        tzdata \	
-        userspace-rcu \	
-        zlib \	
-    && apk -X https://dl-cdn.alpinelinux.org/alpine/edge/main add --no-cache \	
-    	lttng-ust \	
-		# .NET Core Runtime 	
-	&& apk add --no-cache --virtual .build-deps \
-        openssl \
-    && wget -O dotnet.tar.gz https://dotnetcli.blob.core.windows.net/dotnet/Runtime/$DOTNET_VERSION/dotnet-runtime-$DOTNET_VERSION-linux-musl-x64.tar.gz \
-    && dotnet_sha512='fb9a080141038545af3fced55acbd7ef0d4948d527115f67937bfb6eee012eff0c1e18858ccab43f2752711f2eda29445d2c42edf5557348686844b2046a3b54' \
+
+ENV DOTNET_VERSION 2.2.3
+ENV ASPNETCORE_VERSION 2.2.3
+ENV URL https://dotnetcli.blob.core.windows.net/dotnet/Runtime/$DOTNET_VERSION/dotnet-runtime-$DOTNET_VERSION-linux-musl-x64.tar.gz
+RUN apk add --no-cache \
+    ca-certificates \
+    curl \
+    \
+    # .NET Core dependencies
+    krb5-libs \
+    libgcc \
+    libintl \
+    libssl1.1 \
+    libstdc++ \
+    tzdata \
+    userspace-rcu \
+    zlib \
+    lttng-ust
+
+# Configure web servers to bind to port 80 when present
+ENV ASPNETCORE_URLS=http://+:80 \
+    # Enable detection of running in a container
+    DOTNET_RUNNING_IN_CONTAINER=true \
+    # Set the invariant mode since icu_libs isn't included (see https://github.com/dotnet/announcements/issues/20)
+    DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=true
+
+# Install .NET Core
+RUN curl https://dotnetcli.blob.core.windows.net/dotnet/Runtime/$DOTNET_VERSION/dotnet-runtime-$DOTNET_VERSION-linux-musl-x64.tar.gz -o dotnet.tar.gz \
+    && dotnet_sha512='b11e8731dd2e6b8738fb3a2762ed90de08df6661a8720ed76ef9429b99d763d0913ee100042a2995d72a13b50394a7e357397cecb23402c3104075efda04f62b' \
     && echo "$dotnet_sha512  dotnet.tar.gz" | sha512sum -c - \
     && mkdir -p /usr/share/dotnet \
     && tar -C /usr/share/dotnet -xzf dotnet.tar.gz \
     && ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet \
-    && rm dotnet.tar.gz \
-    && apk del .build-deps
+    && rm dotnet.tar.gz
