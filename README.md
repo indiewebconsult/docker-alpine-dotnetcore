@@ -5,7 +5,7 @@ This builder will generate a Docker image that can run a full build of a standal
 
 The ASP.NET Core image builds with the full SDK and .NET Core runtime. It's not intended for standalone applications, and is considerably more bulky. Instead, the ASP.NET Core image can be used to build a standalone Web app with all required dependencies, including Nginx as a reverse proxy. 
 
-The final stage of the build creates a Docker image named `indiewebcsonult/aspdotnetcore:2.2.3-alpine-nginx`.  This image allows you to build your solution down to a minimal x64 Alpine .Net Core Console or Web application without ever opening an install executable for the .Net Core platform (Runtime, SDK, ASP.NET, etc). 
+The final stage of the build creates a Docker image named `indiewebcsonult/aspdotnetcore:{version}`.  This image allows you to build your solution down to a minimal x64 Alpine .Net Core Console or Web application without ever opening an install executable for the .Net Core platform (Runtime, SDK, ASP.NET, etc). Everything you need to build an app is included.
 
 # Some helpful hints about this project's organization
 * Compiled .Net Core versions are named in Docker Compose files for easy build maintenance
