@@ -5,6 +5,7 @@ ENV ASPNETCORE_ENVIRONMENT $aspenv
 ARG serverUrls="http://+:80"
 ENV ASPNETCORE_URLS $serverUrls
 # Install ASP.NET Core
+# ASP .NET Core Version number is overridden by docker compose
 ENV ASPNETCORE_VERSION 2.2.3
 
 RUN apk add --no-cache --virtual .build-deps \

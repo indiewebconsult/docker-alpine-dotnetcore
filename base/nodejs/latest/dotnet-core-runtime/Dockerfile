@@ -1,7 +1,8 @@
-### ASP.NET Core Runtime 2.2.3 (includes full runtime and dependencies)
+### ASP.NET Core Runtime LATEST (includes full runtime and dependencies)
 FROM indiewebconsult/nodejs:latest
 WORKDIR /
 
+# Version numbers are replaced by docker compose
 ENV DOTNET_VERSION 2.2.3
 ENV ASPNETCORE_VERSION 2.2.3
 ENV URL https://dotnetcli.blob.core.windows.net/dotnet/Runtime/$DOTNET_VERSION/dotnet-runtime-$DOTNET_VERSION-linux-musl-x64.tar.gz

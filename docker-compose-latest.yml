@@ -15,7 +15,7 @@ services:
   dncsdk:
     image: indiewebconsult/dotnetcore-sdk:latest
     environment:
-      - "ENV DOTNET_SDK_VERSION=2.2.202"
+      - "DOTNET_SDK_VERSION=2.2.202"
     build:
       context: base/nodejs/latest/dotnet-core-runtime/dotnet-core-sdk
   
@@ -27,6 +27,8 @@ services:
       context: base/nodejs/latest/dotnet-core-runtime/dotnet-core-sdk/aspnet
   
   nginx:
-    image: indiewebcsonult/aspdotnetcore:latest-alpine
+    image: indiewebcsonult/aspdotnetcore:latest-nginx
+    environment:
+      - "NGINX_VERSION=1.15"
     build:
       context: base/nodejs/latest/dotnet-core-runtime/dotnet-core-sdk/aspnet/nginx

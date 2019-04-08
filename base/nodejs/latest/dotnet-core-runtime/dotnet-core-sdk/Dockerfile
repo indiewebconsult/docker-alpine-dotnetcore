@@ -1,4 +1,4 @@
-### ASP.NET Core SDK 2.2.202
+### ASP.NET Core SDK LATEST
 FROM indiewebconsult/dotnetcore-runtime:latest
 # Disable the invariant mode (set in base image)
 RUN apk add --no-cache icu-libs libintl
@@ -8,12 +8,13 @@ ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false \
     LANG=en_US.UTF-8
 
 # Install .NET Core SDK
-ENV DOTNET_SDK_VERSION 2.2.202
+# Version number is overridden by dockercompose
+ENV DOTNET_SDK_VERSION 2.2.202 
 
 RUN apk add --no-cache --virtual .build-deps \
         openssl \
     && curl https://dotnetcli.blob.core.windows.net/dotnet/Sdk/$DOTNET_SDK_VERSION/dotnet-sdk-$DOTNET_SDK_VERSION-linux-musl-x64.tar.gz -o dotnet.tar.gz \
-    && dotnet_sha512='cc2a75abca3314118b97629dad9c21039d80c9dba86b0b89752b2259fa66b7c1734f7e6632e38e785b8db1b12f4a1be67d36330bda5128bec83306088a2547c5' \
+    && dotnet_sha512='62ff6177e91a28b994ccdd90c33643c768840ac881a8b47ca2ebb3b546134c21917e6b9e9321db02855e9c3c84c3ed810969e82a3ab21cb4b5ddd3acce285beb' \
     && echo "$dotnet_sha512  dotnet.tar.gz" | sha512sum -c - \
     && mkdir -p /usr/share/dotnet \
     && tar -C /usr/share/dotnet -xzf dotnet.tar.gz \
