@@ -1,5 +1,5 @@
 # docker-alpine64-dotnetcore
-Staged builder for Docker on Alpine x64, with images for 1) .NetCore Runtime, 2) Runtime with SDK, 3) ASP.NET Core (w/ Runtime and SDK) and 4) All with Nginx baked in for reverse proxy into your ASP.NET Core Web App.
+Staged builder for Docker on Alpine x64, with images for 1) .Net Core Runtime, 2) Runtime with SDK, 3) ASP.NET Core (w/ Runtime and SDK) and 4) All with Nginx baked in for reverse proxy into your ASP.NET Core Web App.
 
 This builder will generate a Docker image that can run a full build of a standalone ASP .NET Core 2.2 Web App. Runtime dependencies for using the full .NET Core SDK and `dotnet` cli are included in the .NET Core SDK Dockerfile.
 
