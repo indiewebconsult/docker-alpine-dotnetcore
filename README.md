@@ -7,7 +7,7 @@ The ASP.NET Core image builds with the full SDK and .NET Core runtime. It's not 
 
 The final stage of the build creates a Docker image named `indiewebcsonult/aspdotnetcore:{version}`.  This image allows you to build your solution down to a minimal x64 Alpine .Net Core Console or Web application without ever opening an install executable for the .Net Core platform (Runtime, SDK, ASP.NET, etc). Everything you need to build a self contained app is included. 
 
-For more information about building a self contained app, visit [this MSDN blog article](https://blogs.msdn.microsoft.com/luisdem/2017/03/19/net-core-1-1-how-to-publish-a-self-contained-application/)
+For more information about building a self contained app, visit [this MSDN blog article](https://blogs.msdn.microsoft.com/luisdem/2017/03/19/net-core-1-1-how-to-publish-a-self-contained-application/).
 
 # Some helpful hints about this project's organization
 * Compiled .Net Core versions are named in Docker Compose files for easy build maintenance, based on what .NET Core version your solution needs to target.
