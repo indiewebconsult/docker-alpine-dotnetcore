@@ -1,0 +1,26 @@
+version: '3'
+services:
+  nodejs:
+    image: indiewebconsult/nodejs:11.0-alpine
+    build:
+      context: base/nodejs/11
+
+  dncr:
+    image: indiewebconsult/dotnetcore-runtime:2.2.3-alpine
+    build:
+      context: base/nodejs/11/dotnet-core-runtime
+
+  dncsdk:
+    image: indiewebconsult/dotnetcore-sdk:2.2.202-alpine
+    build:
+      context: base/nodejs/11/dotnet-core-runtime/dotnet-core-sdk
+  
+  asp:
+    image: indiewebconsult/aspdotnetcore:2.2.3-alpine
+    build:
+      context: base/nodejs/11/dotnet-core-runtime/dotnet-core-sdk/aspnet
+  
+  nginx:
+    image: indiewebcsonult/aspdotnetcore:2.2.3-alpine-nginx
+    build:
+      context: base/nodejs/11/dotnet-core-runtime/dotnet-core-sdk/aspnet/nginx
