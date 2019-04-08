@@ -1,0 +1,32 @@
+version: '3'
+services:
+  nodejs:
+    image: indiewebconsult/nodejs:latest
+    build:
+      context: base/nodejs/latest
+
+  dncr:
+    image: indiewebconsult/dotnetcore-runtime:latest
+    environment:
+      - "DOTNET_VERSION=2.2.3"
+    build:
+      context: base/nodejs/latest/dotnet-core-runtime
+
+  dncsdk:
+    image: indiewebconsult/dotnetcore-sdk:latest
+    environment:
+      - "ENV DOTNET_SDK_VERSION=2.2.202"
+    build:
+      context: base/nodejs/latest/dotnet-core-runtime/dotnet-core-sdk
+  
+  asp:
+    image: indiewebconsult/aspdotnetcore:latest
+    environment:
+      - "ASPNETCORE_VERSION=2.2.3"
+    build:
+      context: base/nodejs/latest/dotnet-core-runtime/dotnet-core-sdk/aspnet
+  
+  nginx:
+    image: indiewebcsonult/aspdotnetcore:latest-alpine
+    build:
+      context: base/nodejs/latest/dotnet-core-runtime/dotnet-core-sdk/aspnet/nginx
