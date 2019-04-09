@@ -27,5 +27,5 @@ sudo docker-compose -f docker-compose-r2.2.3_sdk2.2.202.yml build
 ```
 To build your ASP .NET Core application:
 ```shell
-sudo docker -v ./solution-folder:/app run indiewebconsult/aspdotnetcore:2.2.3-alpine-nginx dotnet build -o /app -r linux-musl-x64 -c Release 
+sudo docker run --rm -ti -v ./solution-folder:/app indiewebconsult/aspdotnetcore:2.2.3-alpine-nginx dotnet build -o /app -r linux-musl-x64 -c Release 
 ```
