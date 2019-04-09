@@ -1,6 +1,6 @@
 #! /bin/bash
 # If we don't have .NET Core project samples, clone them down
-if [ ! -d /samples ]; then
+if [ ! -d samples ]; then
   mkdir samples
 fi
 if [ ! -d "samples/dotnetapp" ]; then
