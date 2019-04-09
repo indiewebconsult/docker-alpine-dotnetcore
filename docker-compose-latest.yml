@@ -16,6 +16,8 @@ services:
     image: indiewebconsult/dotnetcore-sdk:latest
     environment:
       - "DOTNET_SDK_VERSION=2.2.202"
+    volumes:
+      - ./samples/dotnetapp:/app
     build:
       context: base/nodejs/latest/dotnet-core-runtime/dotnet-core-sdk
   
@@ -23,6 +25,8 @@ services:
     image: indiewebconsult/aspdotnetcore:latest
     environment:
       - "ASPNETCORE_VERSION=2.2.3"
+    volumes:
+      - ./samples/aspnetapp:/app
     build:
       context: base/nodejs/latest/dotnet-core-runtime/dotnet-core-sdk/aspnet
   
@@ -30,5 +34,7 @@ services:
     image: indiewebcsonult/aspdotnetcore:latest-nginx
     environment:
       - "NGINX_VERSION=1.15.10"
+    volumes:
+      - ./samples/aspnetapp:/app
     build:
       context: base/nodejs/latest/dotnet-core-runtime/dotnet-core-sdk/aspnet/nginx
