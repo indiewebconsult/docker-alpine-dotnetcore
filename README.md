@@ -19,7 +19,7 @@ For more information about building a self contained app, visit [this MSDN blog 
 # Example of how to use
 To build the latest version of these images:
 ```shell
-sh ./build.sh
+sh ./build-images.sh
 ```
 or a custom version defined by a docker compose file ...
 ```shell
@@ -28,4 +28,11 @@ sudo docker-compose -f docker-compose-r2.2.3_sdk2.2.202.yml build
 To build your ASP .NET Core application:
 ```shell
 sudo docker run --rm -ti -v ./solution-folder:/app indiewebconsult/aspdotnetcore:2.2.3-alpine-nginx dotnet build -o /app -r linux-musl-x64 -c Release 
+```
+or ... use the build scripts to build your app with the latest .Net Core SDK
+```shell
+sh ./build-aspnetapp.sh samples/aspnetapp
+```
+```shell
+sh ./build-dotnetapp.sh samples/dotnetapp
 ```

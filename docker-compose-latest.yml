@@ -31,7 +31,7 @@ services:
       context: base/nodejs/latest/dotnet-core-runtime/dotnet-core-sdk/aspnet
   
   nginx:
-    image: indiewebcsonult/aspdotnetcore:latest-nginx
+    image: indiewebconsult/aspdotnetcore:latest-nginx
     environment:
       - "NGINX_VERSION=1.15.10"
     volumes:
