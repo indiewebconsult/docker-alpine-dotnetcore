@@ -21,7 +21,7 @@ To build the latest version of these images:
 ```shell
 sh ./build.sh
 ```
-or a custom version ...
+or a custom version defined by a docker compose file ...
 ```shell
 sudo docker-compose -f docker-compose-r2.2.3_sdk2.2.202.yml build
 ```
