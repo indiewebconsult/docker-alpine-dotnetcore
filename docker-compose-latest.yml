@@ -29,6 +29,6 @@ services:
   nginx:
     image: indiewebcsonult/aspdotnetcore:latest-nginx
     environment:
-      - "NGINX_VERSION=1.15"
+      - "NGINX_VERSION=1.15.10"
     build:
       context: base/nodejs/latest/dotnet-core-runtime/dotnet-core-sdk/aspnet/nginx

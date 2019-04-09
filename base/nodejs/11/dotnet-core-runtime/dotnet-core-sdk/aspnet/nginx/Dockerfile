@@ -1,6 +1,5 @@
 ### ASP.NET Environment with .NET Core and Nginx for Reverse Proxy/HTTP2 support
-FROM indiewebconsult/aspdotnetcore:2.2.3-alpine
-ENV NGINX_VERSION 1.15
+FROM indiewebconsult/aspdotnetcore:latest
 
 ##
 #
@@ -8,10 +7,7 @@ ENV NGINX_VERSION 1.15
 #
 ##
 
-# ensure www-data user exists
-RUN set -x \
-	&& addgroup -g 82 -S www-data \
-	&& adduser -u 82 -D -S -G www-data www-data
+ENV NGINX_VERSION 1.15.10
 
 RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& CONFIG="\
@@ -28,8 +24,8 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 		--http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp \
 		--http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp \
 		--http-scgi-temp-path=/var/cache/nginx/scgi_temp \
-		--user=www-data \
-		--group=www-data \
+		--user=nginx \
+		--group=nginx \
 		--with-http_ssl_module \
 		--with-http_realip_module \
 		--with-http_addition_module \
@@ -70,7 +66,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 		zlib-dev \
 		linux-headers \
 		curl \
-		gnupg \
+		gnupg1 \
 		libxslt-dev \
 		gd-dev \
 		geoip-dev \
@@ -145,7 +141,15 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& ln -sf /dev/stdout /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY fastcgi.conf /etc/nginx/fastcgi.conf
+COPY mime.types /etc/nginx/mime.types
+COPY proxy.conf /etc/nginx/proxy.conf
+
 VOLUME /etc/nginx/conf.d
 
-EXPOSE 80
-EXPOSE 443
+EXPOSE 80 443
+
+STOPSIGNAL SIGTERM
+
+CMD ["nginx", "-g", "daemon off;"]
